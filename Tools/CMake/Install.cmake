@@ -113,7 +113,7 @@ if(APPLE)
     #copy R executables separately as PROGRAMS so they have execution permissions
 	file(GLOB R_EXECUTABLES LIST_DIRECTORIES false "${_R_Framework}/Resources/bin/*")
   install(
-    PROGRAMS ${R_EXECUTABLES} 
+    PROGRAMS ${R_EXECUTABLES}
     DESTINATION ${JASP_INSTALL_FRAMEWORKDIR}/R.Framework/Resources/bin/
   )
 
@@ -167,7 +167,7 @@ if(APPLE)
 		  DESTINATION ${JASP_INSTALL_FRAMEWORKDIR}/R.Framework/Resources/opt/R/x86_64/gfortran/lib/
 	  )
   endif()
-  
+
 
   # I had to do this manually, since `macdeployqt` misses it.
   # See here: https://bugreports.qt.io/browse/QTBUG-100686
@@ -180,7 +180,7 @@ if(APPLE)
     DESTINATION ${JASP_INSTALL_MODULEDIR}
     REGEX ${FILES_EXCLUDE_PATTERN} EXCLUDE
     REGEX ${FOLDERS_EXCLUDE_PATTERN} EXCLUDE)
-  
+
   install(
     FILES ${MODULES_BINARY_PATH}/modules-settings.json
     DESTINATION ${JASP_INSTALL_MODULEDIR}
@@ -228,13 +228,6 @@ if(LINUX)
 
   install(DIRECTORY ${CMAKE_SOURCE_DIR}/Resources/
           DESTINATION ${JASP_INSTALL_RESOURCEDIR})
-
-  install(
-    DIRECTORY ${MODULES_BINARY_PATH}/binary_pkgs ${MODULES_BINARY_PATH}/manifests ${MODULES_BINARY_PATH}/module_libs ${MODULES_BINARY_PATH}/Tools
-    DESTINATION ${JASP_INSTALL_MODULEDIR}
-    REGEX ${FILES_EXCLUDE_PATTERN} EXCLUDE
-    REGEX ${FOLDERS_EXCLUDE_PATTERN} EXCLUDE)
-
   install(
     FILES ${MODULES_BINARY_PATH}/modules-settings.json
     DESTINATION ${JASP_INSTALL_MODULEDIR}
@@ -285,7 +278,7 @@ endif()
 
   install(FILES ${CMAKE_SOURCE_DIR}/Tools/flatpak/org.jaspstats.JASP.mime.xml
           DESTINATION ${JASP_INSTALL_PREFIX}/share/mime/packages)
-  
+
   #clean up flatpak
   if(FLATPAK_USED)
     install(CODE "execute_process(COMMAND ${CMAKE_SOURCE_DIR}/Tools/flatpak/cleanFlatpak.sh WORKING_DIRECTORY ${CMAKE_BINARY_DIR})")
@@ -428,14 +421,14 @@ if(WIN32)
           ${_LIB_R_INTERFACE_DLL}
     DESTINATION .)
 
-	
+
 	#modules
 	install(
 		DIRECTORY ${MODULES_BINARY_PATH}/binary_pkgs ${MODULES_BINARY_PATH}/manifests ${MODULES_BINARY_PATH}/Tools
 		DESTINATION ${JASP_INSTALL_MODULEDIR}
 		REGEX ${FILES_EXCLUDE_PATTERN} EXCLUDE
 		REGEX ${FOLDERS_EXCLUDE_PATTERN} EXCLUDE)
-	
+
 	install(
 		FILES ${MODULES_BINARY_PATH}/modules-settings.json
 		DESTINATION ${JASP_INSTALL_MODULEDIR}
