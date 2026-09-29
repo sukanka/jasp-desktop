@@ -959,9 +959,10 @@ endif()
 
 if(APPLE OR LINUX)
   message(CHECK_START "Checking for 'libRInside'")
+  # Prefer the static library, but allow system packages that only ship a shared library.
   find_library(
     _LIB_RINSIDE
-    NAMES "libRInside.a"
+    NAMES "libRInside.a" RInside
     PATHS ${RINSIDE_PATH}/lib
     NO_DEFAULT_PATH NO_CACHE REQUIRED)
 
